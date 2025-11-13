@@ -2,11 +2,11 @@
   "__version__": "1.3.9",
   "splash-setting": {
     "logo": {
-      "type": "custom",
+      "type": "default",
       "image": "project://settings/2-hinh-con-chim-canh-cut-de-thuong-inkythuatso-25-13-58-00.jpg"
     },
     "background": {
-      "type": "custom",
+      "type": "default",
       "image": "project://settings/feature1.png"
     }
   }
