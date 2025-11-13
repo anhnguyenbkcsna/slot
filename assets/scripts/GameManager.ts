@@ -13,6 +13,7 @@ export class GameManager extends Component {
 
     isKeyHeld: boolean = false;
     targetItemId: number = -1;
+    isProcessing: boolean = false;
 
     start() {
 
@@ -29,16 +30,19 @@ export class GameManager extends Component {
     private onKeyDown(event: any) {
         if (event.keyCode === KeyCode.SPACE) {
             this.Gacha();
+            setTimeout(() => {
+                this.isProcessing = false;
+            }, 5000);
         }
     }
 
     Gacha() {
-        console.log("Space key pressed");
+        this.isProcessing = true;
         var rnd = randomRangeInt(0, this.itemController!.items.length);
-        var round = randomRangeInt(4, 7);
-        var offset = this.targetItemId - this.itemController!.currentIndex;
+        var round = randomRangeInt(3, 7);
+        var offset = rnd - this.itemController!.currentIndex;
         var totalSteps = round * this.itemController!.items.length + offset;
-        console.log("R key pressed, selecting item id: " + rnd + ", totalSteps: " + totalSteps);
+        console.log("Space key pressed, selecting item id: " + rnd + ", totalSteps: " + totalSteps);
         
         this.itemController.ShowItemClockwise(totalSteps);
         this.slotController.RollTheSlot(totalSteps);

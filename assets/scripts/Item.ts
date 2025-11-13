@@ -14,7 +14,7 @@ export class Item extends Component {
     private currentColor: Color = new Color(255, 255, 255, 255);
     private isKeyHeld: boolean = false;
 
-    protected start(): void {
+    protected onLoad(): void {
         this.sprite = this.getComponent(Sprite);
     }
 

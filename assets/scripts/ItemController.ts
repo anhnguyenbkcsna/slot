@@ -9,7 +9,8 @@ export class ItemController extends Component {
 
     public currentIndex: number = 0;
 
-    onEnable(): void {
+    start(): void {
+        console.log("ItemController started with " + this.items.length + " items.");
         this.items.forEach((item) => {
             item.Hide();
         });

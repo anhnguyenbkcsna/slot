@@ -29,9 +29,9 @@ export class SlotController extends Component {
         const moveDistance = this.slotHeight + this.spacingY;
         const totalDistance = moveDistance * totalSteps;
         const duration = 5; // seconds
-        const resetLimit = 17 * moveDistance;
-
+        
         const startY = this.slotNode.position.y;
+        const resetLimit = 9 * moveDistance;
         const endY = startY + totalDistance;
 
         tween(this.slotNode)
@@ -39,7 +39,7 @@ export class SlotController extends Component {
                 easing: 'linear',
                 onUpdate: () => {
                     const y = this.slotNode.position.y;
-                    // Use modulo to wrap position continuously
+                    // Wrap position continuously
                     const relativeY = ((y - this.startPos.y) % resetLimit + resetLimit) % resetLimit;
                     this.slotNode.setPosition(this.startPos.x, this.startPos.y + relativeY);
                 },
