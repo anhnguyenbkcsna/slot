@@ -1,6 +1,7 @@
 import { _decorator, Component, input, Node, Input, KeyCode, random, randomRange, randomRangeInt } from 'cc';
 import { SlotController } from './SlotController';
 import { ItemController } from './ItemController';
+import { SoundManager } from './SoundManager';
 const { ccclass, property } = _decorator;
 
 @ccclass('GameManager')
@@ -15,10 +16,6 @@ export class GameManager extends Component {
     targetItemId: number = -1;
     isProcessing: boolean = false;
 
-    start() {
-
-    }
-
     onLoad() {
         input.on(Input.EventType.KEY_DOWN, this.onKeyDown, this);
     }
@@ -29,15 +26,18 @@ export class GameManager extends Component {
 
     private onKeyDown(event: any) {
         if (event.keyCode === KeyCode.SPACE) {
+            if (this.isProcessing) return; // Prevent multiple clicks
             this.Gacha();
             setTimeout(() => {
                 this.isProcessing = false;
+                SoundManager.Ins.playWinSound();
             }, 5000);
         }
     }
 
     Gacha() {
         this.isProcessing = true;
+        SoundManager.Ins.playStartSound();
         var rnd = randomRangeInt(0, this.itemController!.items.length);
         var round = randomRangeInt(3, 7);
         var offset = rnd - this.itemController!.currentIndex;
